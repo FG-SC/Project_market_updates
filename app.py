@@ -3,8 +3,8 @@ import yfinance as yf
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from pypfopt.efficient_frontier import EfficientFrontier
-from pypfopt import risk_models, expected_returns
+#from pypfopt.efficient_frontier import EfficientFrontier
+#from pypfopt import risk_models, expected_returns
 from prophet import Prophet
 
 # Set page config to wide mode
@@ -53,27 +53,27 @@ def plot_drawdown(data):
     fig.update_layout(title="Drawdown", xaxis_title="Date", yaxis_title="Drawdown", hovermode="x unified")
     return fig
 
-# Function to optimize portfolio
-def optimize_portfolio(data, method):
-    mu = expected_returns.mean_historical_return(data)
-    S = risk_models.sample_cov(data)
+# # Function to optimize portfolio
+# def optimize_portfolio(data, method):
+#     mu = expected_returns.mean_historical_return(data)
+#     S = risk_models.sample_cov(data)
 
-    ef = EfficientFrontier(mu, S)
+#     ef = EfficientFrontier(mu, S)
     
-    if method == "Maximum Sharpe Ratio":
-        weights = ef.max_sharpe()
-    elif method == "Minimum Volatility":
-        weights = ef.min_volatility()
-    elif method == "Equal Weights":
-        weights = dict.fromkeys(data.columns, 1 / len(data.columns))
-    else:
-        weights = None
+#     if method == "Maximum Sharpe Ratio":
+#         weights = ef.max_sharpe()
+#     elif method == "Minimum Volatility":
+#         weights = ef.min_volatility()
+#     elif method == "Equal Weights":
+#         weights = dict.fromkeys(data.columns, 1 / len(data.columns))
+#     else:
+#         weights = None
 
-    if weights:
-        cleaned_weights = ef.clean_weights()
-        performance = ef.portfolio_performance(verbose=True)
-        return cleaned_weights, performance
-    return None, None
+#     if weights:
+#         cleaned_weights = ef.clean_weights()
+#         performance = ef.portfolio_performance(verbose=True)
+#         return cleaned_weights, performance
+#     return None, None
 
 
 # Function to download data for forecasting
