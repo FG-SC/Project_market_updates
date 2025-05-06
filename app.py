@@ -12,7 +12,7 @@ st.set_page_config(layout="wide")
 
 # Function to download and preprocess data
 def download_data(tickers, start, end):
-    data = yf.download(tickers, start=start, end=end)['Adj Close']
+    data = yf.download(tickers, start=start, end=end)['Close']
     data = data.asfreq('B')  # Align to business days
     data = data.fillna(method='ffill').fillna(method='bfill')  # Fill missing values
     return data
